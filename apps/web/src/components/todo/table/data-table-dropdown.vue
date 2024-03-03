@@ -8,13 +8,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import type { Todo } from '@/types/todo'
 import { MoreHorizontal } from 'lucide-vue-next'
 import DeleteTodo from '../modal/delete-todo.vue'
+import UpdateTodo from '../modal/update-todo.vue'
 
 defineProps<{
-  todo: {
-    id: number
-  }
+  todo: Todo
 }>()
 
 function copy(id: number) {
@@ -34,6 +34,7 @@ function copy(id: number) {
       <DropdownMenuLabel>Actions</DropdownMenuLabel>
       <DropdownMenuItem @click="copy(todo.id)"> Copy todo ID </DropdownMenuItem>
       <DropdownMenuSeparator />
+      <UpdateTodo :todo="todo" />
       <DeleteTodo :todo="todo" />
     </DropdownMenuContent>
   </DropdownMenu>
