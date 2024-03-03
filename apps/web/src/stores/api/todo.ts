@@ -21,7 +21,7 @@ export async function createTodo(data: CreateTodoType) {
   })
 }
 
-export async function updateTodo(data: Todo) {
+export async function updateTodo(data: Partial<Todo>) {
   return ApiService.fetchData({
     url: `/todo/${data.id}`,
     method: 'put',

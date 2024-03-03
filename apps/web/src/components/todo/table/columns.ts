@@ -1,3 +1,4 @@
+import SelectStatus from '@/components/todo/SelectStatus.vue'
 import DropdownAction from '@/components/todo/table/data-table-dropdown.vue'
 import type { Todo } from '@/types/todo'
 import type { ColumnDef } from '@tanstack/vue-table'
@@ -29,7 +30,15 @@ export const columns: ColumnDef<Todo>[] = [
     accessorKey: 'done',
     header: () => h('div', { class: 'text-right' }, 'Status'),
     cell: ({ row }) => {
-      return h('div', { class: 'text-right font-medium' }, row.original.done ? 'Done' : 'Not done')
+      const todo = row.original
+
+      return h(
+        'div',
+        { class: 'relative' },
+        h(SelectStatus, {
+          todo
+        })
+      )
     }
   },
   {
@@ -40,7 +49,7 @@ export const columns: ColumnDef<Todo>[] = [
 
       return h(
         'div',
-        { class: 'relative' },
+        { class: 'relative ml-auto' },
         h(DropdownAction, {
           todo
         })
