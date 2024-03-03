@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/vue-query'
 import { columns } from './table/columns'
 import DataTable from './table/data-table.vue'
 
-const { isPending, isFetching, isError, data, error } = useQuery({
+const { isPending, isError, data, error } = useQuery({
   queryKey: ['todos'],
   queryFn: getTodos
 })

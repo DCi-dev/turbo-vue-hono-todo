@@ -22,7 +22,7 @@ defineProps<{
   }
 }>()
 
-const { isPending, isError, error, isSuccess, mutate } = useMutation({
+const { isPending, mutate } = useMutation({
   mutationFn: (id: number) => deleteTodo(id),
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ['todos'] })
