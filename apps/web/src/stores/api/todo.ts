@@ -1,3 +1,4 @@
+import type { Todo } from '@/types/todo'
 import ApiService from './api'
 import type { CreateTodoType } from './schemas'
 

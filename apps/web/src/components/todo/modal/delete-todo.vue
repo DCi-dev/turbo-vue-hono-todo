@@ -12,7 +12,9 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { deleteTodo } from '@/stores/api/todo'
-import { useMutation } from '@tanstack/vue-query'
+import { useMutation, useQueryClient } from '@tanstack/vue-query'
+
+const queryClient = useQueryClient()
 
 defineProps<{
   todo: {
@@ -21,7 +23,10 @@ defineProps<{
 }>()
 
 const { isPending, isError, error, isSuccess, mutate } = useMutation({
-  mutationFn: (id: number) => deleteTodo(id)
+  mutationFn: (id: number) => deleteTodo(id),
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['todos'] })
+  }
 })
 
 function handleDelete(id: number) {
@@ -35,7 +40,7 @@ function handleDelete(id: number) {
       <Button
         variant="ghost"
         class="w-full justify-start px-2 text-destructive bg-destructive-foreground hover:bg-destructive hover:text-destructive-foreground"
-        >Delete Todo</Button
+        >Delete</Button
       >
     </AlertDialogTrigger>
     <AlertDialogContent>
@@ -52,8 +57,10 @@ function handleDelete(id: number) {
           class="bg-destructive text-destructive-foreground hover:bg-destructive-foreground hover:text-destructive"
           :disabled="isPending"
           @click="handleDelete(todo.id)"
-          >Continue</AlertDialogAction
         >
+          <span v-if="isPending">Creating...</span>
+          <span v-else>Delete</span>
+        </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

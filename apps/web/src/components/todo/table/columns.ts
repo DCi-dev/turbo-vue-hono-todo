@@ -1,4 +1,5 @@
 import DropdownAction from '@/components/todo/table/data-table-dropdown.vue'
+import type { Todo } from '@/types/todo'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 
