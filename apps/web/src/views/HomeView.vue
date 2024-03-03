@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import TodoList from '@/components/TodoList.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>Do you do how how?</h1>
+    <TodoList />
   </main>
 </template>
